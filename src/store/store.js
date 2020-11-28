@@ -4,7 +4,7 @@ import axios from "axios";
 import { error } from "shelljs";
 Vue.use(Vuex);
 
-axios.defaults.baseURL = "http://127.0.0.1:8000/api";
+axios.defaults.baseURL = "http://localhost/todo-laravel/api";
 
 export const store = new Vuex.Store({
   state: {
