@@ -42,7 +42,7 @@ import TodoClearCompleted from "./TodoClearCompleted";
 import TodoItem from "./TodoItem";
 import TodoItemsRemaining from "./TodoItemsRemaining";
 export default {
-  name: "TodoList",
+  name: "todolist",
   components: {
     TodoItem,
     TodoItemsRemaining,

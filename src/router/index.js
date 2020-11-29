@@ -1,9 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-// import TodoList from "@/components/TodoList";
 import App from "@/App";
 import LandingPage from "@/components/marketing/LandingPage";
 import Login from "@/components/auth/Login";
+import Logout from "@/components/auth/Logout";
 import Register from "@/components/auth/Register";
 import Admin from "@/components/layouts/Admin";
 
@@ -19,17 +19,31 @@ export default new Router({
     {
       path: "/todolist",
       name: "todolist",
-      component: App
+      component: App,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: "/login",
       name: "login",
-      component: Login
+      component: Login,
+      meta: {
+        visitor: true
+      }
+    },
+    {
+      path: "/logout",
+      name: "logout",
+      component: Logout
     },
     {
       path: "/register",
       name: "register",
-      component: Register
+      component: Register,
+      meta: {
+        visitor: true
+      }
     },
     {
       path: "/admin",
