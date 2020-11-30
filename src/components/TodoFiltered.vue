@@ -4,16 +4,25 @@
       All
     </button>
     <button
+      class="toDo"
       :class="{ active: filter == 'active' }"
       @click="changeFilter('active')"
     >
-      Active
+      To Do
     </button>
     <button
+      class="completed"
       :class="{ active: filter == 'completed' }"
       @click="changeFilter('completed')"
     >
       Completed
+    </button>
+    <button
+      class="progress"
+      :class="{ active: filter == 'inProgress' }"
+      @click="changeFilter('inProgress')"
+    >
+      In Progress
     </button>
   </div>
 </template>
@@ -32,3 +41,21 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.toDo {
+  background-color: rgb(255, 0, 0);
+  font-weight: 700;
+  border-radius: 6px;
+}
+.completed {
+  background-color: rgb(102, 255, 51);
+  font-weight: 700;
+  border-radius: 6px;
+}
+.progress {
+  background-color: yellow;
+  font-weight: 700;
+  border-radius: 6px;
+}
+</style>

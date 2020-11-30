@@ -2,6 +2,7 @@
   <div class="login-form">
     <h2 class="login-heading">Login</h2>
     <form action="#" @submit.prevent="login">
+      <div v-if="error" class="server-error">{{ error }}</div>
       <div class="form-control">
         <label for="email">Username/Email</label>
         <input
@@ -35,7 +36,8 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      error: ""
     };
   },
   methods: {
@@ -47,8 +49,24 @@ export default {
         })
         .then(response => {
           this.$router.push({ name: "todolist" });
+        })
+        .catch(error => {
+          this.error = error.response.data;
+          (this.username = ""), (this.password = "");
         });
     }
   }
 };
 </script>
+
+<style scoped>
+.server-error {
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  padding: 10px 10px;
+  border-radius: 6px;
+  background: rgba(255, 128, 128, 0.5);
+}
+</style>

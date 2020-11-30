@@ -2,11 +2,17 @@
   <div class="todo-item">
     <div class="todo-item-left">
       <input type="checkbox" v-model="completed" @change="doneEdit" />
+      <input
+        type="checkbox"
+        class="progress"
+        v-model="inProgress"
+        @change="doneEdit"
+      />
       <div
         v-if="!editing"
         @dblclick="editTodo"
         class="todo-item-label"
-        :class="{ completed: completed }"
+        :class="{ completed: completed, inProgress: inProgress }"
       >
         {{ title }}
       </div>
@@ -44,6 +50,7 @@ export default {
       id: this.todo.id,
       title: this.todo.title,
       completed: this.todo.completed,
+      inProgress: this.todo.inProgress,
       editing: this.todo.editing,
       beforeEditCache: ""
     };
@@ -79,6 +86,7 @@ export default {
         id: this.id,
         title: this.title,
         completed: this.completed,
+        inProgress: this.inProgress,
         editing: this.editing
       });
     },
@@ -129,5 +137,9 @@ export default {
 .completed {
   text-decoration: line-through;
   color: grey;
+}
+.inProgress {
+  border-radius: 10px;
+  background: rgba(255, 255, 102, 0.8);
 }
 </style>

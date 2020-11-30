@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import { error } from "shelljs";
 Vue.use(Vuex);
 
 axios.defaults.baseURL = "http://localhost/todo-laravel/api";
@@ -26,6 +25,8 @@ export const store = new Vuex.Store({
         return state.todos.filter(todo => !todo.completed);
       } else if (state.filter == "completed") {
         return state.todos.filter(todo => todo.completed);
+      } else if (state.filter == "inProgress") {
+        return state.todos.filter(todo => todo.inProgress);
       }
       return state.todos;
     },
@@ -42,6 +43,7 @@ export const store = new Vuex.Store({
         id: todo.id,
         title: todo.title,
         completed: false,
+        inProgress: false,
         editing: false
       });
     },
@@ -51,6 +53,7 @@ export const store = new Vuex.Store({
         id: todo.id,
         title: todo.title,
         completed: todo.completed,
+        inProgress: todo.inProgress,
         editing: todo.editing
       });
     },
@@ -76,9 +79,29 @@ export const store = new Vuex.Store({
     },
     destroyToken(state) {
       state.token = null;
+    },
+    clearTodos(state) {
+      state.todos = [];
     }
   },
   actions: {
+    retrieveName(context) {
+      axios.defaults.headers.common["Authorization"] =
+        "Bearer " + context.state.token;
+      return new Promise((resolve, reject) => {
+        axios
+          .get("/user")
+          .then(response => {
+            resolve(response);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    },
+    clearTodos(context) {
+      context.commit("clearTodos");
+    },
     retrieveTodos(context) {
       axios.defaults.headers.common["Authorization"] =
         "Bearer " + context.state.token;
@@ -132,7 +155,8 @@ export const store = new Vuex.Store({
       axios
         .post("/todos", {
           title: todo.title,
-          completed: false
+          completed: false,
+          inProgress: false
         })
         .then(response => {
           context.commit("addTodo", response.data);
@@ -145,7 +169,8 @@ export const store = new Vuex.Store({
       axios
         .patch("/todos/" + todo.id, {
           title: todo.title,
-          completed: todo.completed
+          completed: todo.completed,
+          inProgress: todo.inProgress
         })
         .then(response => {
           context.commit("updateTodo", response.data);

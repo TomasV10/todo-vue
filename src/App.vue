@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="container">
-    <img src="./assets/logo.png" />
+    <img
+      src="https://ps.w.org/dashboard-to-do-list/assets/icon-256x256.jpg?rev=1809858"
+    />
     <todo-list></todo-list>
   </div>
 </template>
@@ -23,5 +25,8 @@ export default {
 .container {
   max-width: 600px;
   margin: 0 auto;
+}
+img {
+  border-radius: 6px;
 }
 </style>
