@@ -1,5 +1,6 @@
 <template>
   <div>
+    Welcome, {{ name }}
     <input
       type="text"
       class="todo-input"
@@ -53,11 +54,15 @@ export default {
   data() {
     return {
       newTodo: "",
-      idForTodo: 3,
-      beforeEditCache: ""
+      idForTodo: "",
+      name: ""
     };
   },
   created() {
+    this.$store.dispatch("retrieveName").then(response => {
+      this.name = response.data.name;
+    });
+
     this.$store.dispatch("retrieveTodos");
   },
   computed: {
