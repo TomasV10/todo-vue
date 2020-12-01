@@ -9,7 +9,8 @@ export const store = new Vuex.Store({
   state: {
     token: localStorage.getItem("access_token" || null),
     filter: "all",
-    todos: []
+    todos: [],
+    users: []
   },
   getters: {
     remaining(state) {
@@ -82,9 +83,22 @@ export const store = new Vuex.Store({
     },
     clearTodos(state) {
       state.todos = [];
+    },
+    retrieveUsers(state, users) {
+      state.users = users;
     }
   },
   actions: {
+    retrieveUsers(context) {
+      axios
+        .get("/userList")
+        .then(response => {
+          context.commit("retrieveUsers", response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     retrieveName(context) {
       axios.defaults.headers.common["Authorization"] =
         "Bearer " + context.state.token;

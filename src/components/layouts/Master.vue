@@ -55,7 +55,7 @@ export default {
   padding: 15px 0;
   margin: 0;
   justify-content: flex-end;
-  background: #f5f8fa;
+  background: #b3e26d;
   border-bottom: 1px solid lightgrey;
   margin-bottom: 24px;
 }

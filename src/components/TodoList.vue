@@ -91,7 +91,6 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import url("https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css");
 .todo-input {
@@ -99,6 +98,7 @@ export default {
   padding: 10px 18px;
   font-size: 18px;
   margin-bottom: 16px;
+  border-radius: 10px;
 }
 .todo-input:focus {
   outline: 0;

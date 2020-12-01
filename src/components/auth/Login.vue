@@ -4,7 +4,7 @@
     <form action="#" @submit.prevent="login">
       <div v-if="error" class="server-error">{{ error }}</div>
       <div class="form-control">
-        <label for="email">Username/Email</label>
+        <label for="email">Email</label>
         <input
           type="email"
           name="username"
